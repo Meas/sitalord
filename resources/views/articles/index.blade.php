@@ -1,6 +1,6 @@
 @extends('layouts\app')
 @section('content')
-<div class="container-fluid">
+<div class="container">
 <h1> Articles </h1>
 <hr>
 @foreach ($articles as $article)

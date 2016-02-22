@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +29,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('articles/create', 'ArticlesController@create');
 	Route::get('articles/edit/{id}', 'ArticlesController@edit');
 	Route::get('articles/show/{id}', 'ArticlesController@show');
+	Route::get('myarticles', 'ArticlesController@myarticles');
 	Route::post('articles/update/{id}', 'ArticlesController@update');
 	Route::post('articles/store', 'ArticlesController@store');
+
+	Route::get('/', function () {
+    return view('welcome');
+});
 });
 
 Route::group(['middleware' => 'web'], function () {

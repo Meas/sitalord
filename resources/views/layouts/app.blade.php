@@ -52,46 +52,45 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/articles') }}">Home</a></li>
+                    @unless(Auth::guest() || Auth::user()->admin==0)
                     <li><a href="{{ url('/articles/create') }}">Create</a></li>
+                    <li><a href="{{ url('/myarticles') }}">My Articles </a></li>
+                    @endunless
                     @yield('put_edit_li')
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <?php $admin=''; ?>
-                    @if (Auth::user()->admin == 1) <?php $admin='(admin)'; ?>
-                    @endif
-                    @if (Auth::guest())
+
+                    @unless (Auth::guest())
+                        
+                        <li class="dropdown">
+                        @if (Auth::user()->admin == 1)
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} (admin) <span class="caret"></span>
+                            </a>
+                        @else
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                        @endif
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                    @else
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
-                    @elseif (Auth::user()->admin == 1)
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                 {{ Auth::user()->name }} (admin)<span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} {{$admin}}<span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
                         </li>
                     @endif
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="container">
     @include('flash::message')
-
+    </div>
     @yield('content')
 
 

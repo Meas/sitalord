@@ -38,7 +38,15 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        if (Auth::user()->admin==1)
+        {
+            return view('articles.create');
+        }
+        else
+        {
+            flash()->error('You do not have the privilege to create an article!');
+            return redirect ('articles');
+        } 
     }
 
     /**
@@ -64,8 +72,16 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findorfail($id);
+        $admin=0;
+        if(Auth::guest())
+        {
 
-        return view('articles.show',compact('article'));
+        }
+        elseif (Auth::user()->admin==1)
+        {
+            $admin=1;
+        }
+        return view('articles.show',compact('article','admin'));
     }
 
     /**
@@ -76,7 +92,17 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $user=Auth::user();
+        if ($user->id == $article->user_id)
+        {
+            return view('articles.edit', compact('article'));
+        }
+        else 
+        {
+            flash()->error('You do not have the permission to edit the article!'); 
+            return redirect('articles/show/'.$id);
+        }
     }
 
     /**
@@ -88,9 +114,28 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+        flash()->success('Your article has been updated!');
+        return redirect('articles');
     }
 
+    public function myarticles()
+    {
+        if (Auth::guest() || Auth::user()->admin==0)
+        {
+            flash()->error('You do not have any articles!');
+            return redirect('articles');
+        }
+        else 
+        {
+            $articles= Auth::user()->articles()->latest('published_at')->published()->get();
+
+            return view('articles.index',compact('articles'));
+        }
+
+
+    }
     /**
      * Remove the specified resource from storage.
      *
