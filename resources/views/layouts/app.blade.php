@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
 
     <style>
         html 
@@ -54,7 +55,8 @@
                     <li><a href="{{ url('/articles') }}">Home</a></li>
                     @unless(Auth::guest() || Auth::user()->admin==0)
                     <li><a href="{{ url('/articles/create') }}">Create</a></li>
-                    <li><a href="{{ url('/myarticles') }}">My Articles </a></li>
+                    <li><a href="{{ url('/myarticles') }}">My Articles</a></li>
+                    <li><a href="{{ url('/slides') }}">Edit Slides</a></li>
                     @endunless
                     @yield('put_edit_li')
                 </ul>
@@ -96,8 +98,9 @@
 
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    @yield('footer')
 </body>
 </html>

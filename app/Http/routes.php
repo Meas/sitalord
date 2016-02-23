@@ -25,6 +25,8 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+	/*articles controllers*/
+
 	Route::get('articles', 'ArticlesController@index');
 	Route::get('articles/create', 'ArticlesController@create');
 	Route::get('articles/edit/{id}', 'ArticlesController@edit');
@@ -33,6 +35,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('articles/update/{id}', 'ArticlesController@update');
 	Route::post('articles/store', 'ArticlesController@store');
 
+	/*slide controllers */
+	Route::get('slides', 'SlidesController@index');
+	Route::get('slides/gallery_upload', 'SlidesController@gallery_upload');
 	Route::get('/', function () {
     return view('welcome');
 });
