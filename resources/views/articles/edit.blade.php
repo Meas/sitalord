@@ -1,8 +1,7 @@
 @extends ('layouts\app')
 @section ('content')
-<div style="margin:20px"><h1>Edit: {{ $article->title}}</h1></div>
+<div class="container"><h1>Edit: {{ $article->title}}</h1>
 	<hr/>
-	<div style="margin:20px">
 		<form method="POST" action="{{ url('/articles/update', $article->id)}}" >
 		<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<b>Title:</b><br>
