@@ -75,7 +75,7 @@ class ArticlesController extends Controller
         $admin=0;
         if(Auth::guest())
         {
-
+            //
         }
         elseif (Auth::user()->admin==1)
         {

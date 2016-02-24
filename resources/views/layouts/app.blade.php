@@ -31,7 +31,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="margin-bottom: 0">
         <div class="container">
             <div class="navbar-header">
 
@@ -90,9 +90,9 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+
     @include('flash::message')
-    </div>
+
     @yield('content')
 
 

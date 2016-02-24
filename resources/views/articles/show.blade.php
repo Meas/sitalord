@@ -9,8 +9,8 @@
 @endsection
                   
 @section ('put_edit_li')
-@if ('http://localhost:7777'.$_SERVER['REQUEST_URI'] == url('/articles/show', $article->id) AND  $admin == 1)
-    <li><a href="{{ url('/articles/edit', $article->id) }}">Edit</a></li>
+@if ('http://localhost:7777'.$_SERVER['REQUEST_URI'] == url('/articles/show', $article->id) &&  $admin == 1)
+    <li><a href="{{ url('/articles/edit', $article->id) }}">Edit Article</a></li>
 @endif
 @endsection
 
