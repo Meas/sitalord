@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddExcerptToArticlesTable extends Migration
+class AddGalleryToPicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddExcerptToArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->integer('excerpt');
+        Schema::table('pictures', function (Blueprint $table) {
+            $table->integer('gallery')->nullable();
         });
     }
 
@@ -24,8 +24,8 @@ class AddExcerptToArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('excerpt');
+        Schema::table('pictures', function (Blueprint $table) {
+            $table->dropColumn('gallery');
         });
     }
 }

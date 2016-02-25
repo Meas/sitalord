@@ -1,12 +1,8 @@
 @extends ('layouts\app')
 @section ('content')
-	<div class="container" style="margin-top: -10px; margin-bottom: -10px">
-	<h1> Write an article</h1>
-	</div>
-	<div class="container-fluid">
-	<hr/>
-	</div>
 	<div class="container">
+	<h1> Write an article</h1>
+	<hr/>
 		<form method="POST" action="{{ url('/articles/store') }}">
 			@include ('articles.form', ['submitButtonText' => 'Add Article', 'body' => '', 'naslov' => '', 'article' => 'false'])
 		</form>

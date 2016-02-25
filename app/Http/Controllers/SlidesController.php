@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Intervention\Image\ImageManager;
+use Image;
+use App\Picture;
 
 class SlidesController extends Controller
 {
@@ -41,7 +44,27 @@ class SlidesController extends Controller
 
     public function gallery_upload()  
     {
+
+        $img = Image::make('img/forest.jpg')->fit(1920, 640);
+        $img->save('img/123.jpg');
+        return $img->response('jpg');
+
         return view('slides.gallery_upload');
+    }
+      public function upload(Request $request)  
+    {
+        /*dd($request->fileInput);*/
+        $file=$request->fileInput;
+        $img = Image::make($file)->fit(1920, 640);
+        $filename  = time() . rand(00000,99999) . '.' . $file->extension();
+        Picture::create(['name'=>$filename, 'gallery'=>'0']);
+        $img->save('img/'.$filename);
+        flash()->success('Image successfuly uploaded');
+        return redirect('slides');
+    }
+      public function gallery()  
+    {
+        return view('slides.gallery');
     }
     public function create()
     {
