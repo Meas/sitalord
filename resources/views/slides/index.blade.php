@@ -9,12 +9,16 @@
 <div style="height:0px;overflow:hidden">
    <input type="file" id="fileInput" name="fileInput" />
 </div>
+<div id="button1">
 <button type="button" class="slider_option_button" onclick="chooseFile();">Upload<br>An<br>Image</button>
 <input class="btn btn-primary form-control" type="submit" value="Submit Image">
+</div>
 </form>
 </div>
+<div id="button2">
 <div class="slider_option2">
-<button class="slider_option_button" onclick="window.location='{{url('slides/gallery_upload') }}';">View<br>The<br>Gallery</button>
+<button class="slider_option_button" onclick="window.location='{{url('slides/gallery_upload') }}';">Select<br>From<br>Gallery</button>
+</div>
 </div>
 @include('errors.list')
 <script>
