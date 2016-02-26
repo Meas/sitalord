@@ -54,21 +54,35 @@ class SlidesController extends Controller
     }
       public function upload(Request $request, $id)  
     {   
-        /*dd($request->fileInput);*/
-        $file=$request->fileInput;
-        $img = Image::make($file)->fit(1920, 640);
-        $filename  = time() . rand(00000,99999) . '.' . $file->extension();
-        Picture::create(['name'=>$filename, 'gallery'=>'0']);
-        $img->save('img/'.$filename);
-        $pic_id=DB::table('pictures')->where('name', $filename)->first();
-        DB::table('picture_slider')->where('slider_id', $id)->update(array('picture_name' => $filename));
-        flash()->success('Image successfuly uploaded');
-        return redirect('slides');
+        if (Auth::user()->admin==1)
+        {
+            $file=$request->fileInput;
+            $img = Image::make($file)->fit(1920, 640);
+            $filename  = time() . rand(00000,99999) . '.' . $file->extension();
+            Picture::create(['name'=>$filename, 'gallery'=>'0']);
+            $img->save('img/'.$filename);
+            $pic_id=DB::table('pictures')->where('name', $filename)->first();
+            DB::table('picture_slider')->where('slider_id', $id)->update(array('picture_name' => $filename));
+            flash()->success('Image successfuly uploaded');
+            return redirect('slides');
+        }
+        else
+        {
+            flash()->error('You do not have the privilege to do that!');
+            return redirect ('articles');
+        }
     }
       public function slide_select($id)  
     {
-        
-        return view('slides.slide_select',compact('id'));
+        if (Auth::user()->admin==1)
+        {
+            return view('slides.slide_select',compact('id'));
+        }
+        else
+        {
+            flash()->error('You do not have the privilege to do that!');
+            return redirect ('articles');
+        }
     }
     public function create()
     {
