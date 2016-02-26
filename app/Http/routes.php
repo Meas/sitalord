@@ -38,8 +38,8 @@ Route::group(['middleware' => ['web']], function () {
 	/*slide controllers */
 	Route::get('slides', 'SlidesController@index');
 	Route::get('slides/gallery_upload', 'SlidesController@gallery_upload');
-	Route::post('slides/upload', 'SlidesController@upload');
-
+	Route::post('slides/upload/{id}', 'SlidesController@upload');
+	Route::get('slides/slide{id}', 'SlidesController@slide_select');
 	Route::get('/', function () {
     return view('welcome');
 });

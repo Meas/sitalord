@@ -15,6 +15,7 @@ class CreatePicturesTable extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('gallery')->nullable();
             $table->timestamps();
         });
         Schema::create('article_picture', function (Blueprint $table) {
@@ -29,8 +30,7 @@ class CreatePicturesTable extends Migration
         });
         Schema::create('picture_slider', function (Blueprint $table) {
             $table->integer('slider_id');
-            $table->integer('picture_id')->unsigned()->index();
-            $table->foreign('picture_id')->references('id')->on('pictures')->onDelete('cascade');
+            $table->string('picture_name');
 
             $table->timestamps();
         });

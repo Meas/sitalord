@@ -26,11 +26,10 @@ img
 
 <div class="proba">
 <div id="owl-demo" class="owl-carousel owl-theme">
- 
-  <div class="item"><img src="img/sea.jpg" alt="Mountain"></div>
-  <div class="item"><img src="img/mountain.jpg" alt="Sea"></div>
-  <div class="item"><img src="img/forest.jpg" alt="Forest"></div>
- 
+  @foreach ($slides as $slide)
+  <div class="item"><img src="img/{{$slide->picture_name}}" alt="Slide"></div>
+
+  @endforeach
 </div>
 </div>
 <script>

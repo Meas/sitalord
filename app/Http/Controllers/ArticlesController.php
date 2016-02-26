@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Controllers\Controller;
 use Auth;
+use DB;
 
 use App\Article;
 
@@ -27,8 +28,8 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles= Article::latest('published_at')->published()->get();
-
-        return view('articles.index',compact('articles'));
+        $slides=DB::table('picture_slider')->get();
+        return view('articles.index',compact('articles','slides'));
     }
 
     /**

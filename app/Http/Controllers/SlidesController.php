@@ -10,6 +10,7 @@ use Auth;
 use Intervention\Image\ImageManager;
 use Image;
 use App\Picture;
+use DB;
 
 class SlidesController extends Controller
 {
@@ -51,20 +52,23 @@ class SlidesController extends Controller
 
         return view('slides.gallery_upload');
     }
-      public function upload(Request $request)  
-    {
+      public function upload(Request $request, $id)  
+    {   
         /*dd($request->fileInput);*/
         $file=$request->fileInput;
         $img = Image::make($file)->fit(1920, 640);
         $filename  = time() . rand(00000,99999) . '.' . $file->extension();
         Picture::create(['name'=>$filename, 'gallery'=>'0']);
         $img->save('img/'.$filename);
+        $pic_id=DB::table('pictures')->where('name', $filename)->first();
+        DB::table('picture_slider')->where('slider_id', $id)->update(array('picture_name' => $filename));
         flash()->success('Image successfuly uploaded');
         return redirect('slides');
     }
-      public function gallery()  
+      public function slide_select($id)  
     {
-        return view('slides.gallery');
+        
+        return view('slides.slide_select',compact('id'));
     }
     public function create()
     {
