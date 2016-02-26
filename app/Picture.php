@@ -13,7 +13,7 @@ class Picture extends Model
 
     public function Article()
     {
-    	return $this->belongsTo('App\Article');
+    	return $this->belongsToMany('App\Article');
     }
 
 }

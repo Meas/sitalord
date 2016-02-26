@@ -38,3 +38,33 @@ width:20%;
 	color: black;
 	width:100%;
 }
+.article_header {
+	position: relative;	
+}
+.article_title {
+	position: absolute;
+	bottom: 0;
+	background: rgba(0,0,0,0.7);
+	color:white;
+	padding: 10px;
+	padding-left: 20px;
+	width:100%;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	font-size: 4vmin;
+	text-transform: uppercase;
+}
+.article_body {
+	margin-top:25px;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 300;
+	font-size: 2.5vmin;
+
+}
+.div_flash {
+	position:fixed;
+	top:0;
+	width:100%;
+	text-align: center;
+	font-size: 3vmin;
+}

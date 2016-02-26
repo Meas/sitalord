@@ -1,12 +1,19 @@
 		
-			 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet" />
-      		<script src="http://code.jquery.com/jquery.js"></script>
-    		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+	
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<b>Title:</b><br>
 			<input type="text" class="form-control" name="title" id='title' value='{{$naslov}}'><br>
+
+			<div style="height:0px;overflow:hidden">
+  				<input type="file" id="fileInput" name="fileInput" />
+			</div>
+			<button type="button" class="btn btn-default" onclick="chooseFile();">Choose a picture</button><br><br>
+			
 			<b>Body:</b><br>
 			<textarea class="form-control" name="body" style="height:200px;" id='body'>{{$body}}</textarea><br>
+
 			<b>Published on:</b>
 			<input class="form-control" type="date" name="published_at" id="published_at"><br>
 		
@@ -15,8 +22,9 @@
 		
 
 		
-				<script>
-					$('#tags2').select2({
-						placeholder: 'Choose a tag'
-					});
-				</script>
+<script>
+   function chooseFile() {
+      $("#fileInput").click();
+   }
+   CKEDITOR.replace( 'body' );
+</script>

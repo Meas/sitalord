@@ -3,7 +3,7 @@
 	<div class="container">
 	<h1> Write an article</h1>
 	<hr/>
-		<form method="POST" action="{{ url('/articles/store') }}">
+		<form method="POST" action="{{ url('/articles/store') }}" enctype='multipart/form-data'>
 			@include ('articles.form', ['submitButtonText' => 'Add Article', 'body' => '', 'naslov' => '', 'article' => 'false'])
 		</form>
 	<br>

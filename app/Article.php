@@ -37,9 +37,9 @@ class Article extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function Picture()
+    public function Pictures()
     {
-        return $this->HasMany('App\Picure')->withTimestamps();
+        return $this->belongsToMany('App\Picture');
     }
 
 

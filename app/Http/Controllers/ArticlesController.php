@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
+use Image;
 
+use App\Picture;
 use App\Article;
 
 
@@ -58,7 +61,14 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
+        $file=$request->fileInput;
         $article = Auth::user()->articles()->create($request->all());
+        $img = Image::make($file)->fit(1920, 640);
+        $filename  = time() . rand(00000,99999) . '.' . $file->extension();
+        $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
+        $img->save('img/'.$filename);
+
+        $article->pictures()->attach($pic);
         flash()->success('Your article has been created!');
         return redirect('articles');
 
@@ -73,6 +83,7 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findorfail($id);
+        $pictures=Picture::get();
         $admin=0;
         if(Auth::guest())
         {
@@ -82,7 +93,7 @@ class ArticlesController extends Controller
         {
             $admin=1;
         }
-        return view('articles.show',compact('article','admin'));
+        return view('articles.show',compact('article','admin','pictures'));
     }
 
     /**
