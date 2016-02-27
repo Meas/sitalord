@@ -31,8 +31,9 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles= Article::latest('published_at')->published()->get();
+        $pictures=Picture::get();
         $slides=DB::table('picture_slider')->get();
-        return view('articles.index',compact('articles','slides'));
+        return view('articles.index',compact('articles','slides','pictures'));
     }
 
     /**
@@ -61,14 +62,26 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $file=$request->fileInput;
+        
         $article = Auth::user()->articles()->create($request->all());
-        $img = Image::make($file)->fit(1920, 640);
-        $filename  = time() . rand(00000,99999) . '.' . $file->extension();
-        $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
-        $img->save('img/'.$filename);
+        if ($request->fileInput) 
+        {
+            $file=$request->fileInput;
+            $img = Image::make($file)->fit(1920, 640);
+            $img_thumb=Image::make($file)->fit(480,160);
 
-        $article->pictures()->attach($pic);
+            $filename  = time() . rand(00000,99999) . '.' . $file->extension();
+            $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
+            $pic_thumb=Picture::create(['name'=>'300_' . $filename, 'gallery'=>'0']);
+
+            $img->save('img/'.$filename);
+            $img_thumb->save('img/'. '300_' . $filename);
+
+            $article->pictures()->attach($pic);
+            $article->pictures()->attach($pic_thumb);
+            DB::table('article_picture')->where('article_id', $article->id)->update(array('main' => 1));
+        }
+
         flash()->success('Your article has been created!');
         return redirect('articles');
 
@@ -84,6 +97,7 @@ class ArticlesController extends Controller
     {
         $article = Article::findorfail($id);
         $pictures=Picture::get();
+        $has_pic=0;
         $admin=0;
         if(Auth::guest())
         {
@@ -93,7 +107,7 @@ class ArticlesController extends Controller
         {
             $admin=1;
         }
-        return view('articles.show',compact('article','admin','pictures'));
+        return view('articles.show',compact('article','admin','pictures','has_pic'));
     }
 
     /**
@@ -124,7 +138,7 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
         $article = Article::findOrFail($id);
         $article->update($request->all());
@@ -141,9 +155,9 @@ class ArticlesController extends Controller
         }
         else 
         {
+            $pictures=Picture::get();
             $articles= Auth::user()->articles()->latest('published_at')->published()->get();
-
-            return view('articles.index',compact('articles'));
+            return view('articles.index',compact('articles', 'pictures'));
         }
 
 

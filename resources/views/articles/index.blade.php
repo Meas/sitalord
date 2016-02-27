@@ -5,12 +5,39 @@
 @if ('http://localhost:7777'.$_SERVER['REQUEST_URI'] == url('/articles'))
 @include('slides.slider')
 @endif
-<div class="container">
+<div class="articles_main">
 <h1> Articles </h1>
 <hr>
 @foreach ($articles as $article)
-		<h2> <a href="{{ url('/articles/show',$article->id) }}">{{ $article->title }} </a></h2>
-		<p> {!! $article->body !!} </p>
+	<?php $pic=0 ?>
+	@foreach($pictures as $picture)
+		@foreach($article->pictures as $Apic)
+			@if($picture->id == $Apic->id && substr($picture->name, 0, 4)=='300_')
+				<?php $pic=1 ?>
+				<div style="border:1px solid black;">
+					<div class="article_header">
+					<a href="{{ url('/articles/show',$article->id) }}"><img src="/img/{{$picture->name}}" alt="Article Pic">
+					<div class="article_title"><h2> {{ $article->title }} </h2></div></a>
+					</div>
+					<p> {!! $article->body !!} </p>
+				</div>
+				<br>
+			@endif
+		@endforeach
+	@endforeach
+	@if ($pic==0)
+		<div style="border:1px solid black;">
+			<div>
+			<a href="{{ url('/articles/show',$article->id) }}" style="text-decoration:none">
+			<div class="article_title_no_pic">
+				
+				<h2> {{ $article->title }} </h2></div></a>
+
+			</div>
+			<p> {!! $article->body !!} </p>
+		</div>
+		<br>
+	@endif
 @endforeach
 </div>
 

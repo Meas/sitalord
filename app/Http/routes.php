@@ -40,6 +40,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('slides/gallery_upload', 'SlidesController@gallery_upload');
 	Route::post('slides/upload/{id}', 'SlidesController@upload');
 	Route::get('slides/slide{id}', 'SlidesController@slide_select');
+
+	Route::get('gallery', 'GalleryController@index');
 	Route::get('/', function () {
     return view('welcome');
 });

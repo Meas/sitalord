@@ -13,6 +13,8 @@
 			<input style="width:1080px;background-color: lightblue;border:none;color:white;font-size:20px;font-family:Arial Black, Gadget, serif;" type="submit" value="Update Article"> -->
 			@include ('articles.form', ['submitButtonText' => 'Update Article','body' => $article->body, 'naslov' => $article->title])
 		</form>
+		<br>
+	@include('errors.list')
 	</div>
 
 
