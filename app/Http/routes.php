@@ -42,6 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('slides/slide{id}', 'SlidesController@slide_select');
 
 	Route::get('gallery', 'GalleryController@index');
+	Route::post('gallery/upload', 'GalleryController@upload');
+
 	Route::get('/', function () {
     return view('welcome');
 });

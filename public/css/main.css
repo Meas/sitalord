@@ -87,3 +87,20 @@ width:20%;
 	width:30%;
 	margin-left:5%;
 }
+.gallery_display {
+	position: relative;
+	margin-top:20px;
+	margin-left:10%;
+	border:1px solid black;
+	width:85%;
+	float:left;
+	padding-bottom: 10px;
+
+}
+.gallery_img {
+	margin-top:10px;
+	margin-left:20px;
+	width:30%;
+	position:relative;
+	float:left;
+}
