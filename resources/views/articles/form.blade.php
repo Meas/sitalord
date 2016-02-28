@@ -9,7 +9,7 @@
 			<div style="height:0px;overflow:hidden">
   				<input type="file" id="fileInput" name="fileInput" />
 			</div>
-			<button type="button" class="btn btn-default" onclick="chooseFile();">Choose a picture</button><br><br>
+			<button type="button" class="btn btn-default" onclick="chooseFile();">Choose a picture</button>&nbsp;&nbsp;&nbsp;<span class="filename">Nothing selected</span><br><br>
 			
 			<b>Body:</b><br>
 			<textarea class="form-control" name="body" style="height:200px;" id='body'>{{$body}}</textarea><br>
@@ -27,4 +27,11 @@
       $("#fileInput").click();
    }
    CKEDITOR.replace( 'body' );
+   
+   $(function() {
+     $("input:file").change(function (){
+       var fileName = $(this).val();
+       $(".filename").html(fileName);
+     });
+  });
 </script>

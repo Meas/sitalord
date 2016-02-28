@@ -28,6 +28,7 @@ class ArticleRequest extends Request
             'title'=>'required|min:3',
             'body'=>'required',
             'published_at'=>'required|date',
+            'fileInput'=>'required',
         ];
     }
 }
