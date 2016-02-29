@@ -4,7 +4,7 @@
 
 @foreach ($pictures as $picture)
 	@foreach($article->pictures as $Apic)
-		@if ($picture->id == $Apic->id && substr($picture->name, 0, 4)!='300_')
+		@if ($picture->id == $Apic->id)
             <?php $has_pic=1 ?>
 			<div class="article_header"> <img style="width:100%;" src="/img/{{$picture->name}}" alt="Article Pic">
         @endif

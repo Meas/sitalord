@@ -30,9 +30,21 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        $articles= Article::latest('published_at')->published()->get();
+        $articles= Article::latest('created_at')->published()->get();
         $pictures=Picture::get();
-        $slides=DB::table('picture_slider')->get();
+       /* $aaa=Picture::with('articles');
+        /*dd($aaa);
+        dd($pictures->articles());
+
+        foreach($pictures as $aaaa){echo $aaaa->id;}
+        return;
+        dd($pictures);
+        $slidess=collect(DB::table('article_picture')->select()->get());
+
+        dd($slidess->article_id);*/
+        $slides=Picture::has('articles')->latest('created_at')->take(3)->get();
+        
+      
         return view('articles.index',compact('articles','slides','pictures'));
     }
 
@@ -72,13 +84,12 @@ class ArticlesController extends Controller
 
             $filename  = time() . rand(00000,99999) . '.' . $file->extension();
             $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
-            $pic_thumb=Picture::create(['name'=>'300_' . $filename, 'gallery'=>'0']);
 
             $img->save('img/'.$filename);
             $img_thumb->save('img/'. '300_' . $filename);
 
             $article->pictures()->attach($pic);
-            $article->pictures()->attach($pic_thumb);
+
             DB::table('article_picture')->where('article_id', $article->id)->update(array('main' => 1));
         }
 
@@ -151,13 +162,12 @@ class ArticlesController extends Controller
 
             $filename  = time() . rand(00000,99999) . '.' . $file->extension();
             $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
-            $pic_thumb=Picture::create(['name'=>'300_' . $filename, 'gallery'=>'0']);
+
 
             $img->save('img/'.$filename);
             $img_thumb->save('img/'. '300_' . $filename);
-            dd($article->pictures());
-            $article->pictures()->sync(array('picture_id' => $pic->id))->first();
-            $article->pictures()->sync(array('picture_id' => $pic_thumb->id))->second();
+
+            $article->pictures()->sync(array('picture_id' => $pic->id));
             DB::table('article_picture')->where('article_id', $article->id)->update(array('main' => 1));
         }
         flash()->success('Your article has been updated!');

@@ -27,7 +27,8 @@ img
 <div class="proba">
 <div id="owl-demo" class="owl-carousel owl-theme">
   @foreach ($slides as $slide)
-  <div class="item"><img src="img/{{$slide->picture_name}}" alt="Slide"></div>
+
+  <div class="item"><img src="img/{{$slide->name}}" alt="Slide"></div>
 
   @endforeach
 </div>

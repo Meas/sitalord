@@ -12,12 +12,12 @@
 	<?php $pic=0 ?>
 	@foreach($pictures as $picture)
 		@foreach($article->pictures as $Apic)
-			@if($picture->id == $Apic->id && substr($picture->name, 0, 4)=='300_')
+			@if($picture->id == $Apic->id)
 				<?php $pic=1 ?>
 				<div style="border:1px solid black;">
 					<div class="article_header">
 						<a href="{{ url('/articles/show',$article->id) }}">
-						<img style="width:100%;" src="/img/{{$picture->name}}" alt="Article Pic">
+						<img style="width:100%;" src="/img/300_{{$picture->name}}" alt="Article Pic">
 						<div class="article_title">{{ $article->title }} 
 						</div></a>
 

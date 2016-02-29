@@ -11,7 +11,7 @@ class Picture extends Model
     'gallery',
     ];
 
-    public function Article()
+    public function Articles()
     {
     	return $this->belongsToMany('App\Article')->withTimestamps();
     }

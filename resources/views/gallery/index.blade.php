@@ -18,12 +18,10 @@
 
 <div id="myGallery" class="gallery_display">
 @foreach ($pictures as $picture)
-@unless(substr($picture->name, 0, 4)=='300_')
 <div class="gallery_img">
 <a href="/img/{{$picture->name}}">
 <img style="width:100%" src="/img/300_{{$picture->name}}" alt="Article Pic"></a>
 </div>
-@endunless
 @endforeach
 </div>
 <script>

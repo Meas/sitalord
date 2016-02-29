@@ -24,7 +24,6 @@ class GalleryController extends Controller
 
             $filename  = time() . rand(00000,99999) . '.' . $file->extension();
             $pic=Picture::create(['name'=>$filename, 'gallery'=>'1']);
-            $pic_thumb=Picture::create(['name'=>'300_' . $filename, 'gallery'=>'1']);
 
             $img->save('img/'.$filename);
             $img_thumb->save('img/'. '300_' . $filename);
