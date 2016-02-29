@@ -13,7 +13,7 @@ class Picture extends Model
 
     public function Article()
     {
-    	return $this->belongsToMany('App\Article');
+    	return $this->belongsToMany('App\Article')->withTimestamps();
     }
 
 }

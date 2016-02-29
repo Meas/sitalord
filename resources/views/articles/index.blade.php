@@ -16,10 +16,13 @@
 				<?php $pic=1 ?>
 				<div style="border:1px solid black;">
 					<div class="article_header">
-					<a href="{{ url('/articles/show',$article->id) }}"><img style="width:100%;" src="/img/{{$picture->name}}" alt="Article Pic">
-					<div class="article_title"><h2> {{ $article->title }} </h2></div></a>
+						<a href="{{ url('/articles/show',$article->id) }}">
+						<img style="width:100%;" src="/img/{{$picture->name}}" alt="Article Pic">
+						<div class="article_title">{{ $article->title }} 
+						</div></a>
+
 					</div>
-					<p> {!! $article->body !!} </p>
+					{!! $article->body !!} 
 				</div>
 				<br>
 			@endif

@@ -13,7 +13,7 @@ use App\Picture;
 class GalleryController extends Controller
 {
     public function index() {
-    	$pictures=Picture::where('gallery', '1')->get();
+    	$pictures=Picture::where('gallery', '1')->latest('updated_at')->get();
     	return view('gallery.index',compact('pictures'));
     }
     public function upload(Request $request) {

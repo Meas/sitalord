@@ -138,10 +138,28 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
         $article->update($request->all());
+
+        if ($request->fileInput)
+        {
+            $file=$request->fileInput;
+            $img = Image::make($file)->fit(1920, 640);
+            $img_thumb=Image::make($file)->fit(480,160);
+
+            $filename  = time() . rand(00000,99999) . '.' . $file->extension();
+            $pic=Picture::create(['name'=>$filename, 'gallery'=>'0']);
+            $pic_thumb=Picture::create(['name'=>'300_' . $filename, 'gallery'=>'0']);
+
+            $img->save('img/'.$filename);
+            $img_thumb->save('img/'. '300_' . $filename);
+            dd($article->pictures());
+            $article->pictures()->sync(array('picture_id' => $pic->id))->first();
+            $article->pictures()->sync(array('picture_id' => $pic_thumb->id))->second();
+            DB::table('article_picture')->where('article_id', $article->id)->update(array('main' => 1));
+        }
         flash()->success('Your article has been updated!');
         return redirect('articles');
     }

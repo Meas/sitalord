@@ -2,7 +2,7 @@
 @section ('content')
 <div class="container"><h1>Edit: {{ $article->title}}</h1>
 	<hr/>
-		<form method="POST" action="{{ url('/articles/update', $article->id)}}" >
+		<form method="POST" action="{{ url('/articles/update', $article->id)}}" enctype='multipart/form-data'>
 		<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<b>Title:</b><br>
 			<input type="text" name="title" id='title' value='{{ $article->title }}'><br><br>

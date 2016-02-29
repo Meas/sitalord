@@ -43,14 +43,10 @@ class SlidesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function gallery_upload()  
+    public function select_from_gallery($id)  
     {
-
-        $img = Image::make('img/forest.jpg')->fit(1920, 640);
-        $img->save('img/123.jpg');
-        return $img->response('jpg');
-
-        return view('slides.gallery_upload');
+        $pictures=Picture::get();
+        return view('slides.select_from_gallery',compact('id','pictures'));
     }
       public function upload(Request $request, $id)  
     {   
@@ -58,9 +54,15 @@ class SlidesController extends Controller
         {
             $file=$request->fileInput;
             $img = Image::make($file)->fit(1920, 640);
+            $img_thumb=Image::make($file)->fit(480,160);
+
             $filename  = time() . rand(00000,99999) . '.' . $file->extension();
             Picture::create(['name'=>$filename, 'gallery'=>'0']);
+            Picture::create(['name'=>'300_' . $filename, 'gallery'=>'0']);
+
             $img->save('img/'.$filename);
+            $img_thumb->save('img/'.'300_'.$filename);
+
             $pic_id=DB::table('pictures')->where('name', $filename)->first();
             DB::table('picture_slider')->where('slider_id', $id)->update(array('picture_name' => $filename));
             flash()->success('Image successfuly uploaded');
@@ -84,9 +86,14 @@ class SlidesController extends Controller
             return redirect ('articles');
         }
     }
-    public function create()
+    public function change(Request $request, $id)
     {
-        //
+
+        $pic_name=substr($request->select, 4);
+        DB::table('picture_slider')->where('slider_id', $id)->update(array('picture_name' => $pic_name));
+        flash()->success('Slide'.$id.' successufly changed!');
+        return redirect ('slides');
+
     }
 
     /**

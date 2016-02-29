@@ -19,7 +19,7 @@
 </div>
 <div id="button2">
 <div class="slider_option2">
-<button class="slider_option_button" onclick="window.location='{{url('slides/gallery_upload') }}';">Select<br>From<br>Gallery</button>
+<button class="slider_option_button" onclick="window.location='{{url('slides/select_from_gallery/slide').$id }}';">Select<br>From<br>Gallery</button>
 </div>
 </div>
 @include('errors.list')

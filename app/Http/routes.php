@@ -37,9 +37,10 @@ Route::group(['middleware' => ['web']], function () {
 
 	/*slide controllers */
 	Route::get('slides', 'SlidesController@index');
-	Route::get('slides/gallery_upload', 'SlidesController@gallery_upload');
+	Route::get('slides/select_from_gallery/slide{id}', 'SlidesController@select_from_gallery');
 	Route::post('slides/upload/{id}', 'SlidesController@upload');
 	Route::get('slides/slide{id}', 'SlidesController@slide_select');
+	Route::post('slides/change/slide{id}', 'SlidesController@change');
 
 	Route::get('gallery', 'GalleryController@index');
 	Route::post('gallery/upload', 'GalleryController@upload');
