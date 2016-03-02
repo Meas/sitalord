@@ -51,7 +51,11 @@ class GalleryController extends Controller
             $pic->delete();           
             flash()->warning('Picture has been deleted!');
         }
-            return redirect('gallery');
+        else {
+            flash()->error('You do not have the priviledge to do that');
+        }
+        return redirect('gallery');
+        
     }
 
 

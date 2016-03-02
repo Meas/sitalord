@@ -20,8 +20,10 @@
 <div id="myGallery" class="gallery_display">
 @foreach ($docs as $doc)
 
-	<div class="gallery_img">
-	<embed src="docs/{{$doc->name}}" width=300 height=100></embedd>
+	<div class="docs_img">
+	<a href="docs/{{$doc->name}}">
+	<img style="width:100%;height:100%" src="/docs/document.png" alt="Document">
+	<div style="position:relative;text-align: center;"> {{$doc->originalName}} </div></a>
 	@unless(Auth::guest() || Auth::user()->admin==0)
 	<form method="POST" action="{{ url('/documents/delete',$doc->id) }}">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">

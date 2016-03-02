@@ -44,9 +44,10 @@ class ArticlesController extends Controller
 
         dd($slidess->article_id);*/
         $slides=Picture::has('articles')->latest('created_at')->take(3)->get();
+        $textslides=DB::table('textslides')->first();
         
       
-        return view('articles.index',compact('articles','slides','pictures'));
+        return view('articles.index',compact('articles','slides','pictures','textslides'));
     }
 
     /**

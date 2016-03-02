@@ -59,7 +59,9 @@
                     @unless(Auth::guest() || Auth::user()->admin==0)
                     <li><a href="{{ url('/articles/create') }}">Create</a></li>
                     <li><a href="{{ url('/myarticles') }}">My Articles</a></li>
+                    <li><a href="{{ url('/text_slide') }}">Text Slide</a></li>
                     @endunless
+                    <li><a href="{{ url('/documents') }}">Docs</a></li>
                     <li><a href="{{ url('/gallery') }}">Gallery</a></li>
                     @yield('put_edit_li')
                 </ul>
@@ -96,7 +98,7 @@
     <div class="div_flash">
     @include('flash::message')
     </div>
-
+    
     @yield('content')
 
 

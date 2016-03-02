@@ -49,6 +49,10 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('documents', 'DocsController@index');
 	Route::post('documents/upload', 'DocsController@upload');
+	Route::post('documents/delete/{id}', 'DocsController@destroy');
+
+	Route::get('text_slide', 'TextSlidesController@edit');
+	Route::post('text_slide/update', 'TextSlidesController@update');
 
 	Route::get('/', function () {
     return view('welcome');

@@ -5,6 +5,9 @@
 @if ('http://localhost:7777'.$_SERVER['REQUEST_URI'] == url('/articles'))
 @include('slides.slider')
 @endif
+<div class="example1">
+<h3> {{$textslides->text}} </h3>
+</div>
 <div class="articles_main">
 <h1> Articles </h1>
 <hr>

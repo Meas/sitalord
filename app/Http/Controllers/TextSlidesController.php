@@ -6,23 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\Doc;
-use File;
+use App\TextSlide;
 use Auth;
+use DB;
 
-class DocsController extends Controller
+class TextSlidesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        
-        $docs=Doc::latest('created_at')->get();
-        return view('docs.index',compact('docs'));
+        //
     }
 
     /**
@@ -32,7 +33,7 @@ class DocsController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -41,14 +42,9 @@ class DocsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function upload(Request $request)
+    public function store(Request $request)
     {
-        $file=$request->fileInput;
-        $filename  = time() . rand(00000,99999) . '.' . $file->extension();
-        $originalName=$file->getClientOriginalName();
-        Doc::create(['name' => $filename, 'originalName' => $originalName]);
-        $file->move('docs/', $filename);
-        return redirect ('documents');
+        //
     }
 
     /**
@@ -68,9 +64,16 @@ class DocsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        if (Auth::user()->admin==1)
+        {
+            
+            $body="";
+            $body=DB::table('textslides')->first();
+            
+            return view ('text_slide.edit',compact('body'));
+        }
     }
 
     /**
@@ -80,9 +83,12 @@ class DocsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        $text= DB::table('textslides')->where('id',1)->update(['text' => $request->body]);
+        flash()->success('Text Slide successfuly updated!')
+        return redirect ('text_slide');
     }
 
     /**
@@ -93,16 +99,6 @@ class DocsController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->admin==1)
-        {
-            $doc=Doc::findorfail($id);
-            File::delete('docs/'.$doc->name);
-            $doc->delete();           
-            flash()->warning('Document has been deleted!');
-        }
-        else {
-            flash()->error('You do not have the priviledge to do that');
-        }
-        return redirect ('documents');
+        //
     }
 }

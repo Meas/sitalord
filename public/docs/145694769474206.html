@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function mede(a) {
+    var pic;
+    if (a == 0) {
+        pic = "https://leavingthelandofcotton.files.wordpress.com/2013/11/photo.gif"
+    } 
+    if (a == 1) {
+        pic = "http://cdn3.bigcommerce.com/s-fw2plafw/products/7538/images/9052/30271-2__08845.1429311603.1280.1280.jpg?c=2"
+    }
+    if (a == 2) {
+        pic = "https://i.ytimg.com/vi/nH6rSufP5N8/maxresdefault.jpg"
+    }
+    if (a == 3) {
+        pic = "http://3.bp.blogspot.com/-X8iDZ2HDNMQ/UDQmdGmJESI/AAAAAAAABdk/zRKyd2WRR04/s1600/family-guy-care-bear-suicide_o_GIFSoup.com.gif"
+    }
+    else {}
+    document.getElementById('myImage').src = pic;
+}
+</script>
+<style>
+ul#menu {
+    padding: 0;
+}
+
+ul#menu li {
+    display: inline;
+}
+ul#menu li a{text-decoration:none;}
+ul#menu li.juti {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+}
+ul#menu li.happy {
+    background-color: yellow;
+    color: blue;
+    padding: 10px 20px;
+}
+ul#menu li.tuzni {
+    background-color: gray;
+    color: black;
+    padding: 10px 20px;
+}
+ul#menu li.gjupi {
+    background-color: purple;
+    color: green;
+    padding: 10px 20px;
+}
+ul#menu li.juti:hover {
+    background-color: orange;
+}
+ul#menu li.happy:hover {
+    background-color: red;
+}
+ul#menu li.tuzni:hover {
+    background-color: brown;
+}
+ul#menu li.gjupi:hover {
+    background-color: pink;
+}
+</style>
+</head>
+<body>
+
+<h2>Horizontal List</h2>
+
+<ul id="menu">
+  <li class="juti" onclick="mede(0)">Juti</li>
+  <li class="happy" onclick="mede(1)">Happy</li>
+  <li class="tuzni" onclick="mede(2)">Tuzni</li>
+  <li class="gjupi" onclick="mede(3)">Gjupi</li>
+</ul>  
+<img id="myImage">
+</body>
+</html>
