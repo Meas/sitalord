@@ -59,7 +59,6 @@
                     @unless(Auth::guest() || Auth::user()->admin==0)
                     <li><a href="{{ url('/articles/create') }}">Create</a></li>
                     <li><a href="{{ url('/myarticles') }}">My Articles</a></li>
-                    <li><a href="{{ url('/slides') }}">Edit Slides</a></li>
                     @endunless
                     <li><a href="{{ url('/gallery') }}">Gallery</a></li>
                     @yield('put_edit_li')

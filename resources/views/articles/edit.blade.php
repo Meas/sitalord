@@ -1,6 +1,9 @@
 @extends ('layouts\app')
 @section ('content')
 <div class="container"><h1>Edit: {{ $article->title}}</h1>
+<form method="POST" action="{{ url('/articles/delete/'. $article->id) }}">
+<input type="submit" value="Delete Article">
+
 	<hr/>
 		<form method="POST" action="{{ url('/articles/update', $article->id)}}" enctype='multipart/form-data'>
 		<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}">

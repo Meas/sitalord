@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use DB;
 use Image;
+use File;
 
 use App\Picture;
 use App\Article;
@@ -198,6 +199,22 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        if (Auth::guest() || Auth::user()->admin==0)
+        {
+            flash()->error('You do not have the privilege to do that!');  
+        }
+        else
+        {
+            $article=Article::findorfail($id);
+            $pic=$article->pictures()->get();
+            File::delete('img/'.$pic[0]->name);
+            File::delete('img/300_'.$pic[0]->name);
+            $article->delete();
+            $pic[0]->delete();
+            flash()->warning('Article deleted!');
+        }
+        return redirect('articles');
+
     }
 }

@@ -3,6 +3,7 @@
 <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
 <link href="http://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
 
+
 @unless(Auth::guest() || Auth::user()->admin==0)
 <form method="POST" action="{{ url('gallery/upload')}}" enctype='multipart/form-data'>
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -21,6 +22,14 @@
 <div class="gallery_img">
 <a href="/img/{{$picture->name}}">
 <img style="width:100%" src="/img/300_{{$picture->name}}" alt="Article Pic"></a>
+@unless(Auth::guest() || Auth::user()->admin==0)
+<form method="POST" action="{{ url('/gallery/delete',$picture->id) }}">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<div class="iksic">
+<input type="image" src="/img/iksic.png" name"Submit" alt="Submit" style="height:100%;width:100%;">
+</div>
+</form>
+@endunless
 </div>
 @endforeach
 </div>

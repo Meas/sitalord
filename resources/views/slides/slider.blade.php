@@ -26,9 +26,16 @@ img
 
 <div class="proba">
 <div id="owl-demo" class="owl-carousel owl-theme">
-  @foreach ($slides as $slide)
+@foreach ($slides as $slide)
 
-  <div class="item"><img src="img/{{$slide->name}}" alt="Slide"></div>
+  <div class="item">
+    <a href="{{ url('/articles/show',$slide->articles()->first()->id) }}">
+    <img src="img/{{$slide->name}}" alt="Slide">
+    <div class="article_title"> 
+        {{ $slide->articles()->first()->title}} 
+    </div>
+    </a>
+  </div>
 
   @endforeach
 </div>
