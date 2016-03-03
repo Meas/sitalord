@@ -68,7 +68,7 @@ class TextSlidesController extends Controller
     {
         if (Auth::user()->admin==1)
         {
-            
+       
             $body="";
             $body=DB::table('textslides')->first();
             
@@ -87,8 +87,8 @@ class TextSlidesController extends Controller
     {
         
         $text= DB::table('textslides')->where('id',1)->update(['text' => $request->body]);
-        flash()->success('Text Slide successfuly updated!')
-        return redirect ('text_slide');
+        flash()->success('Text Slide successfuly updated!');
+        return redirect ('articles');
     }
 
     /**

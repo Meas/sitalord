@@ -1,7 +1,6 @@
 @extends('layouts\app')
 @section('content')
-<script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
-<link href="http://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
+
 
 
 @unless(Auth::guest() || Auth::user()->admin==0)
@@ -10,7 +9,7 @@
 <div style="height:0px;overflow:hidden">
    <input type="file" id="fileInput" name="fileInput" />
 </div>
-<div style="width:180px;float:left position: relative;">
+<div style="width:100%;float:left position: relative;background-color: rgb(240,240,240);">
 <button type="button" onclick="chooseFile();">Upload A File</button><br><br>
 <input  type="submit" value="Submit File">
 </div>

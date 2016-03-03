@@ -13,25 +13,25 @@
 <style>
 img 
 {
-	width:100%;
+	margin-left:10%;
+  width:80%;
 	height:auto;
 }
 @media all and (max-width: 1000px) {
     .proba {
         display:none;
-        margin:-20px;
     }
 }
 </style>
 
 <div class="proba">
-<div id="owl-demo" class="owl-carousel owl-theme">
+<div id="owl-demo" class="owl-carousel owl-theme" style="background-color: rgb(240,240,240);">
 @foreach ($slides as $slide)
 
   <div class="item">
     <a href="{{ url('/articles/show',$slide->articles()->first()->id) }}">
     <img src="img/{{$slide->name}}" alt="Slide">
-    <div class="article_title"> 
+    <div class="article_title" style="margin-left:10%;width:80%;"> 
         {{ $slide->articles()->first()->title}} 
     </div>
     </a>

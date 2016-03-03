@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('articles/update/{id}', 'ArticlesController@update');
 	Route::post('articles/store', 'ArticlesController@store');
 	Route::post('articles/delete/{id}', 'ArticlesController@destroy');
+	Route::get('articles/all', 'ArticlesController@all');
 
 	/*slide controllers */
 	Route::get('slides', 'SlidesController@index');
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('text_slide/update', 'TextSlidesController@update');
 
 	Route::get('/', function () {
-    return view('welcome');
+    return redirect('/articles');
 });
 });
 

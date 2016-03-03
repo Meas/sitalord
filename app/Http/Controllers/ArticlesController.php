@@ -26,12 +26,12 @@ class ArticlesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show','all']]);
     }
 
     public function index()
     {
-        $articles= Article::latest('created_at')->published()->get();
+        $articles= Article::latest('created_at')->published()->take(5)->get();
         $pictures=Picture::get();
        /* $aaa=Picture::with('articles');
         /*dd($aaa);
@@ -182,15 +182,22 @@ class ArticlesController extends Controller
         {
             flash()->error('You do not have any articles!');
             return redirect('articles');
+
         }
         else 
         {
             $pictures=Picture::get();
-            $articles= Auth::user()->articles()->latest('published_at')->published()->get();
+            $articles= Auth::user()->articles()->latest('created_at')->get();
             return view('articles.index',compact('articles', 'pictures'));
         }
 
 
+    }
+    public function all() 
+    {
+        $pictures=Picture::get();
+        $articles= Article::latest('created_at')->published()->get();
+        return view('articles.index', compact('articles', 'pictures'));
     }
     /**
      * Remove the specified resource from storage.

@@ -23,9 +23,12 @@
         html 
         { 
          overflow-y: scroll; 
+         background-color: rgb(240,240,240);
+         
         }
         body {
             font-family: 'Lato';
+            background-color: rgb(240,240,240);
         }
 
         .fa-btn {
@@ -47,15 +50,14 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                <a class="navbar-brand" href="{{ url('/articles') }}">
+                    Home
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/articles') }}">Home</a></li>
                     @unless(Auth::guest() || Auth::user()->admin==0)
                     <li><a href="{{ url('/articles/create') }}">Create</a></li>
                     <li><a href="{{ url('/myarticles') }}">My Articles</a></li>

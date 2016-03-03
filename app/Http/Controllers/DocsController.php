@@ -48,6 +48,7 @@ class DocsController extends Controller
         $originalName=$file->getClientOriginalName();
         Doc::create(['name' => $filename, 'originalName' => $originalName]);
         $file->move('docs/', $filename);
+        flash()->success('Document has been uploaded!');
         return redirect ('documents');
     }
 

@@ -85,8 +85,8 @@ width:10%;
 }
 .articles_main {
 	position: relative;
-	width:30%;
-	margin-left:5%;
+	width:40%;
+	margin-left:10%;
 	float:left;
 }
 .gallery_display {
@@ -136,9 +136,24 @@ width:10%;
 	position:relative;
 	background-color: blue;
 }
+/*border shadow*/
+.imagedropshadow {
+ padding: 5px; 
+ border: solid 1px #EFEFEF;
+  } 
+ .imagedropshadow { 
+  border: solid 1px #CCC; 
+  -moz-box-shadow: 1px 1px 5px #999;
+  -webkit-box-shadow: 1px 1px 5px #999;
+   box-shadow: 1px 1px 5px #999;
+  	  }
+/* -- border shadow */
+
 /* scrolling text */
 .example1 {
  height: 50px;	
+ width:80%;
+ margin-left:10%;
  overflow: hidden;
  position: relative;
 }
@@ -179,3 +194,8 @@ width:10%;
  transform: translateX(-100%); 
  }
 /* -- scrolling text */
+.div_article_index {
+	margin-left:10%;
+	width:80%;
+	position:absolute;
+}
