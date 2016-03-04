@@ -74,6 +74,11 @@
                             </div>
                         </div>
                     </form>
+                    <div style="margin-left: 35%; width:30%;">
+                        <a class="btn btn-block btn-social btn-facebook" href="{{url('/auth/facebook')}}">
+                            <span class="fa fa-facebook"></span> Sign in with Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

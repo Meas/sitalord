@@ -31,7 +31,7 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        $articles= Article::latest('created_at')->published()->take(5)->get();
+        $articles= Article::latest('created_at')->published()->paginate(5);
         $pictures=Picture::get();
        /* $aaa=Picture::with('articles');
         /*dd($aaa);
@@ -81,6 +81,7 @@ class ArticlesController extends Controller
         if ($request->fileInput) 
         {
             $file=$request->fileInput;
+
             $img = Image::make($file)->fit(1920, 640);
             $img_thumb=Image::make($file)->fit(480,160);
 
@@ -120,7 +121,7 @@ class ArticlesController extends Controller
         {
             $admin=1;
         }
-        return view('articles.show',compact('article','admin','pictures','has_pic'));
+        return view('articles.show',compact('article','admin','pictures','has_pic','id'));
     }
 
     /**
@@ -187,7 +188,7 @@ class ArticlesController extends Controller
         else 
         {
             $pictures=Picture::get();
-            $articles= Auth::user()->articles()->latest('created_at')->get();
+            $articles= Auth::user()->articles()->latest('created_at')->paginate(5);
             return view('articles.index',compact('articles', 'pictures'));
         }
 
@@ -196,7 +197,7 @@ class ArticlesController extends Controller
     public function all() 
     {
         $pictures=Picture::get();
-        $articles= Article::latest('created_at')->published()->get();
+        $articles= Article::latest('created_at')->published()->paginate(5);
         return view('articles.index', compact('articles', 'pictures'));
     }
     /**

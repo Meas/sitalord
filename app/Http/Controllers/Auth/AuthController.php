@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -38,6 +40,49 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $name = $user->getName();
+        $email = $user->getEmail();
+        $avatar = $user->getAvatar();
+        $avatar .= "&width=200&height=200";
+        $check_user = User::where('email', $email)->first();
+
+        if ($check_user === null) {
+
+            User::create([
+            'name' => $name,
+            'email' => $email,
+            ]);
+            $check_user = User::where('email', $email)->first();
+        }
+        
+        Auth::loginUsingId($check_user->id);
+
+        return redirect('articles');
+
+        /*dd($user->token);
+        $user->getName();
+        $user->getEmail();
+        $user->getAvatar();
+        $user->token;*/
     }
 
     /**

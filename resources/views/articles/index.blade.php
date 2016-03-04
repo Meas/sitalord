@@ -55,6 +55,7 @@
 		<br>
 	@endif
 @endforeach
-</div>
+
+{!! $articles->links() !!}
 
 @stop
